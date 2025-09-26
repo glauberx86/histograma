@@ -1,0 +1,113 @@
+body {
+  font-family: Roboto, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  line-height: 1.6;
+  background-color: #222222;
+}
+.container {
+  background: rgb(20, 20, 20);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(40, 40, 40, 0.1);
+}
+h1 {
+  text-align: center;
+  color: #cacaca;
+  margin-bottom: 30px;
+}
+h3 {
+  color: #cacaca;
+  margin-bottom: 30px;
+}
+.form-group {
+  margin-bottom: 20px;
+}
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #bebebe;
+}
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #2f2f2f;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+textarea {
+  height: 100px;
+  resize: vertical;
+}
+.csv-hint {
+  font-size: 12px;
+  color: #888;
+  margin-top: 5px;
+}
+.csv-input {
+  border: 1px solid #2f2f2f;
+  background: #333;
+  color: #eee;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.btn {
+  background: #007bff;
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  margin-top: 20px;
+}
+.btn:hover {
+  background: #0056b3;
+}
+.error {
+  color: red;
+  background: #ffebee;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  border-left: 4px solid red;
+}
+.section {
+  border-top: 2px solid #eee;
+  padding-top: 20px;
+  margin-top: 20px;
+}
+.or-divider {
+  text-align: center;
+  margin: 20px 0;
+  position: relative;
+}
+.or-divider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #ddd;
+}
+.or-divider span {
+  background: white;
+  padding: 0 20px;
+  color: #666;
+  font-weight: bold;
+}

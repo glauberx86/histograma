@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histogram Result - {{ title }}</title>
+    <link rel="stylesheet" href="static/result.css">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ title }}</h1>
+        
+        <div class="histogram-container">
+            <img src="data:image/png;base64,{{ img_data }}" alt="Histograma gerado" class="histogram-img">
+        </div>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-label">Total de valores</div>
+                <div class="stat-value">{{ "{:,}".format(stats.count) }}</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Média</div>
+                <div class="stat-value">{{ "%.2f"|format(stats.mean) }}</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Mínimo</div>
+                <div class="stat-value">{{ "%.2f"|format(stats.min) }}</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Máximo</div>
+                <div class="stat-value">{{ "%.2f"|format(stats.max) }}</div>
+            </div>
+        </div>
+        
+        <div class="actions">
+            <a href="/" class="btn btn-primary">Criar outro histograma</a>
+            <button onclick="window.print()" class="btn btn-secondary">Imprimir/Salvar como PDF</button>
+        </div>
+        
+        <div class="download-hint">
+            <p><strong>Dica:</strong> Salve a imagem clicando com botão direito nela, ou use o botão de imprimir para .</p>
+        </div>
+    </div>
+</body>
+</html>

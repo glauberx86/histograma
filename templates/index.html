@@ -1,12 +1,85 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Histograma</title>
-  </head>
-  <body>
-    <h1>Gráfico gerado com Matplotlib</h1>
-    <img src="/hist.png" alt="Gráfico Matplotlib" />
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Criador de Histograma</title>
+  <link rel="stylesheet" href="static/styles.css" />
+</head>
+
+<body>
+  <div class="container">
+    <h1>Criador de Histograma</h1>
+
+    {% if error %}
+    <div class="error"><strong>Error:</strong> {{ error }}</div>
+    {% endif %}
+
+    <form action="/generate_histogram" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="data_input">Insira os dados (separados por virgula ou espaço):</label>
+        <textarea name="data_input" id="data_input"
+          placeholder="Exemplo: 1.5, 2.3, 4.7, 3.2, 5.1, 2.8, 3.9, 4.2, 1.9, 3.4"></textarea>
+      </div>
+
+      <div class="or-separator">.</div>
+
+      <div class="form-group">
+        <label for="csv_file">Upload de CSV:</label>
+        <input type="file" name="csv_file" id="csv_file" class="csv-input" accept=".csv" />
+        <small class="csv-hint">Faça upload de um CSV com dados númericos.</small>
+      </div>
+
+      <div class="section">
+        <h3>Opções do histograma</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="bins">Colunas (auto, sturges, sqrt ou um número):</label>
+            <input type="text" name="bins" id="bins" value="auto" placeholder="auto" />
+          </div>
+
+          <div class="form-group">
+            <label for="color">Cor:</label>
+            <select name="color" id="color">
+              <option value="blue">Azul</option>
+              <option value="green">Verde</option>
+              <option value="red">Vermelho</option>
+              <option value="purple">Roxo</option>
+              <option value="orange">Laranja</option>
+              <option value="brown">Marrom</option>
+              <option value="pink">Rosa</option>
+              <option value="gray">Cinza</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="title">Título do gráfico:</label>
+          <input type="text" name="title" id="title" value="Histograma" />
+        </div>
+
+        <div class="form-group">
+          <label for="title">Coluna a ser analisada:</label>
+          <input type="text" name="collum" id="collum" value="Coluna" />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="x_label">Rótulo do eixo X:</label>
+            <input type="text" name="x_label" id="x_label" value="Valores" />
+          </div>
+
+          <div class="form-group">
+            <label for="y_label">Rótulo do eixo Y:</label>
+            <input type="text" name="y_label" id="y_label" value="Frequência" />
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn">Gerar histograma</button>
+    </form>
+  </div>
+</body>
+
 </html>

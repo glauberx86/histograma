@@ -1,0 +1,94 @@
+body {
+  font-family: Arial, sans-serif;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  line-height: 1.6;
+  background-color: #222222;
+}
+.container {
+  background: rgb(20, 20, 20);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(40, 40, 40, 0.1);
+}
+h1 {
+  text-align: center;
+  color: #cacaca;
+  margin-bottom: 30px;
+}
+.histogram-container {
+  text-align: center;
+  margin: 30px 0;
+  background: #cacaca;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #bebebe;
+}
+.histogram-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin: 30px 0;
+}
+.stat-item {
+  background: rgb(20, 20, 20);
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid #eee;
+}
+.stat-label {
+  font-weight: bold;
+  color: #eee;
+  font-size: 14px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.stat-value {
+  font-size: 18px;
+  color: #007bff;
+  font-weight: bold;
+}
+.actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+.btn {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s;
+}
+.btn-primary {
+  background: #007bff;
+  color: #eee;
+}
+.btn-primary:hover {
+  background: #0056b3;
+}
+.btn-secondary {
+  background: #6c757d;
+  color: eee;
+}
+.btn-secondary:hover {
+  background: #545b62;
+}
+.download-hint {
+  text-align: center;
+  margin-top: 20px;
+  color: #666;
+  font-size: 14px;
+}
