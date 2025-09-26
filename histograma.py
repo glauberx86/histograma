@@ -1,96 +1,50 @@
 import pandas as pd
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import numpy as np
-import os
+import io
+import base64
 
-environmentType = os.environ.get('APP_ENV', 'production')
-
-if environmentType == 'development':
-    file_path = '.env/titanic.csv'
-    print("--- Programa rodando em modo de desenvolvimento. ---")
-else:
-    file_path = ''
-
-print(">> Digite o caminho do arquivo CSV:")
-
-# Dados
-if file_path == '':
-    while True:
-        try:
-            file_path = input("> ")
-            df = pd.read_csv(file_path)
-            break
-        except FileNotFoundError:
-            print("Arquivo não encontrado. Verifique o caminho e tente novamente.")
-        except Exception as e:
-            print("Erro ao ler o arquivo:", e)
-else:
-    df = pd.read_csv(file_path)
-
-# Select Coluna
-mapCollum = {col.lower(): col for col in df.columns}
-
-while True:
+def read_file(file_stream):
     try:
-        print(">> Colunas disponíveis:", list(df.columns))
-        print(">> Digite o nome da coluna que deseja analisar:")
-        collum_input = input("> ").strip().lower()
-
-        print(f">> Coluna selecionada: {mapCollum[collum_input]}")
-        break
+        return pd.read_csv(file_stream)
     except Exception as e:
-        print("Erro ao selecionar coluna:", e)
+        raise ValueError(f"Erro ao processar o arquivo CSV: {e}")
 
-# Numero de Colunas histograma (Bins)
-binType = ['sturges', 'fd', 'auto']
-bins = ''
+def gen_hist(data, title, bins, color, x_label, y_label):
+    if data is None or data.empty:
+        raise ValueError("Não foi possível gerar o gráfico pois o conjunto de dados está vazio.")
 
-while True:
+    fig, ax = plt.subplots()
+    ax.hist(data, bins=bins, color=color, edgecolor='black')
+    ax.set_title(title)
+    ax.set_xlabel(x_label)
+    ax.set_ylabel(y_label)
+    fig.tight_layout()
+
+    buf = io.BytesIO()
+    fig.savefig(buf, format='png')
+    plt.close(fig)
+    buf.seek(0)
+    
+    img_base64 = base64.b64encode(buf.read()).decode('utf-8')
+
+    stats = {
+        'count': int(data.count()),
+        'mean': float(data.mean()),
+        'std': float(data.std()),
+        'min': float(data.min()),
+        'max': float(data.max())
+    }
+
+    return img_base64, stats
+
+def parse_text(text_data):
     try:
-        print(">> Digite o tipo de coluna ou quantidade de colunas a ser usada no histograma:",
-        "(Sturges, FD para Freedman-Diaconis; Padrão: 'auto')")
-        bins_input = input("> ").strip().lower()
-        
-        if not bins_input:
-            bins = 'auto'
-            print(">> Usando regra padrão: 'auto'")
-            break
-        elif bins_input in binType:
-            bins = bins_input
-            print(f">> Usando regra: '{bins_input}'")
-            break
-        else:
-            bins = int(bins_input)
-            print(f">> Usando número de colunas: {bins}")
-            break            
-    except ValueError:
-        print("Por favor, insira uma regra ou um número inteiro válido.")
+        items = text_data.replace(',', ' ').split()
+        numeric_data = pd.to_numeric(pd.Series(items), errors='coerce').dropna()
+        if numeric_data.empty:
+            raise ValueError("Nenhum dado numérico válido foi encontrado no texto inserido.")
+        return numeric_data
     except Exception as e:
-        print("Erro ao ler entrada:", e)
-
-# Gerar grafico
-data = df[mapCollum[collum_input]].dropna().to_numpy()
-print('Bins:', bins, 'data:', data)
-
-plt.hist(data, bins=bins, edgecolor='black')
-plt.tight_layout()
-plt.show()
-
-# Exportar grafico png
-#plt.savefig(format="png")
-#plt.close()
-
-# Perguntar se quer recomeçar ou encerrar
-while True:
-    print(">> Deseja analisar outra coluna? (s/n)")
-    restart_input = input("> ").strip().lower()
-        
-    if restart_input == 's':
-        # Recomeçar o programa
-        exec(open(__file__).read())
-        break
-    elif restart_input == 'n':
-        print(">> Encerrando o programa.")
-        break
-    else:
-        print("Por favor, responda com 's' para sim ou 'n' para não.")
+        raise ValueError(f"Erro ao processar os dados de texto: {e}")
