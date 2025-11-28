@@ -92,3 +92,22 @@ h1 {
   color: #666;
   font-size: 14px;
 }
+
+/* Print only the container content */
+@media print {
+  /* Hide everything */
+  body * {
+    visibility: hidden;
+  }
+  /* Show the container and its children */
+  .container,
+  .container * {
+    visibility: visible;
+  }
+  /* Remove extras inside the container from printing */
+  .actions,
+  .download-hint {
+    display: none !important;
+    visibility: hidden !important;
+  }
+}
