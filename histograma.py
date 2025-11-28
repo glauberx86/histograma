@@ -16,7 +16,14 @@ def gen_hist(data, title, bins, color, x_label, y_label):
         raise ValueError("Não foi possível gerar o gráfico pois o conjunto de dados está vazio.")
 
     fig, ax = plt.subplots()
-    ax.hist(data, bins=bins, color=color, edgecolor='black')
+    counts, bin_edges, patches = ax.hist(data, bins=bins, color=color, edgecolor='black')
+
+    # Intervalo de classe
+    bin_labels = [f"{bin_edges[i]:.2f} - {bin_edges[i + 1]:.2f}" for i in range(len(bin_edges) - 1)]
+    tick_positions = (bin_edges[:-1] + bin_edges[1:]) / 2
+    ax.set_xticks(tick_positions)
+    ax.set_xticklabels(bin_labels, rotation=45, ha='right')
+
     ax.set_title(title)
     ax.set_xlabel(x_label)
     ax.set_ylabel(y_label)
