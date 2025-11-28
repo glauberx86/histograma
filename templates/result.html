@@ -20,16 +20,24 @@
                 <div class="stat-value">{{ "{:,}".format(stats.count) }}</div>
             </div>
             <div class="stat-item">
-                <div class="stat-label">Média</div>
-                <div class="stat-value">{{ "%.2f"|format(stats.mean) }}</div>
+                <div class="stat-label">Maior valor</div>
+                <div class="stat-value">{{ "%.2f"|format(stats.max) }}</div>
             </div>
             <div class="stat-item">
                 <div class="stat-label">Menor valor</div>
                 <div class="stat-value">{{ "%.2f"|format(stats.min) }}</div>
             </div>
             <div class="stat-item">
-                <div class="stat-label">Maior valor</div>
-                <div class="stat-value">{{ "%.2f"|format(stats.max) }}</div>
+                <div class="stat-label">Média</div>
+                <div class="stat-value">{{ "%.2f"|format(stats.mean) }}</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Número de classes</div>
+                <div class="stat-value">{{ stats.classes }}</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Intervalo de classe</div>
+                <div class="stat-value">{{ "%.2f"|format(stats.interval) }}</div>
             </div>
         </div>
         

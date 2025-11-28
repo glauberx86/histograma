@@ -36,12 +36,17 @@ def gen_hist(data, title, bins, color, x_label, y_label):
     
     img_base64 = base64.b64encode(buf.read()).decode('utf-8')
 
+    class_count = len(bin_edges) - 1
+    class_interval = bin_edges[1] - bin_edges[0] if class_count > 0 else 0
+
     stats = {
         'count': int(data.count()),
         'mean': float(data.mean()),
         'std': float(data.std()),
         'min': float(data.min()),
-        'max': float(data.max())
+        'max': float(data.max()),
+        'classes': class_count,
+        'interval': float(class_interval)
     }
 
     return img_base64, stats
